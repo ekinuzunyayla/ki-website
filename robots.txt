@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ekinuzunyayla.github.io/ki-website/sitemap.xml
