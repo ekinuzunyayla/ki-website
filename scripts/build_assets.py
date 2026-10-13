@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild assets/ from the Kip app repo and the store-screenshot captures.
+"""Rebuild assets/ from the Ki app repo and the store-screenshot captures.
 
 Screenshots come from the raw app captures behind the store set (system bars already stripped), fonts from the
 app's own Bricolage Grotesque and Manrope (docs/design/tokens.md §2). The app has no icon yet, so the site mark is
@@ -23,7 +23,7 @@ from pathlib import Path
 SITE = Path(__file__).resolve().parent.parent
 ASSETS = SITE / "assets"
 
-SHOTS = ["01-push-ladder", "02-easier", "03-pull-detail", "04-paths", "04-set", "05-rest", "06-home", "07-end", "08-charts"]
+SHOTS = ["01-push-ladder", "02-easier", "03-pull-detail", "04-paths", "04-set", "05-rest", "07-end", "08-charts", "08-history-top"]
 SHOT_WIDTHS = {"": 320, "@2x": 640}
 DEFAULT_SHOTS = Path.home() / "Desktop/kip-aso/kreatif/ham/_prep/android-phone"
 BASE_PATH = "/ki-website/"
@@ -90,7 +90,7 @@ def _capture(shots_dir: Path, name: str):
 
 
 def _mark(size: int, bricolage: Path):
-    """The site mark: "k" and the accent dot of the "kip." wordmark on the app background."""
+    """The site mark: "k" and the accent dot of the "ki." wordmark on the app background."""
     from PIL import Image, ImageDraw, ImageFont
 
     scale = 4
@@ -146,7 +146,7 @@ def build(app: Path, shots_dir: Path) -> None:
         for name, size in {"icon-192.png": 192, "apple-touch-icon.png": 180, "favicon-32.png": 32}.items():
             _mark(size, bricolage).save(img / name, optimize=True)
 
-        # Social card: wordmark, the store headline and the home screen.
+        # Social card: wordmark, the store headline and the workout player.
         og = Image.new("RGB", (1200, 630), BACKGROUND)
         glow = Image.new("RGB", og.size, BACKGROUND)
         ImageDraw.Draw(glow).ellipse((700, -260, 1400, 360), fill=(0x2A, 0x33, 0x1C))
@@ -155,14 +155,14 @@ def build(app: Path, shots_dir: Path) -> None:
         word = ImageFont.truetype(str(bricolage), 56)
         head = ImageFont.truetype(str(bricolage), 66)
         body = ImageFont.truetype(str(manrope), 30)
-        draw.text((80, 84), "kip", font=word, fill=TEXT)
-        draw.ellipse((80 + draw.textlength("kip", font=word) + 4, 84 + 41, 80 + draw.textlength("kip", font=word) + 16, 84 + 53), fill=ACCENT)
+        draw.text((80, 84), "ki", font=word, fill=TEXT)
+        draw.ellipse((80 + draw.textlength("ki", font=word) + 4, 84 + 41, 80 + draw.textlength("ki", font=word) + 16, 84 + 53), fill=ACCENT)
         draw.text((80, 236), "From wall push-ups", font=head, fill=TEXT)
         draw.text((80, 312), "to ", font=head, fill=TEXT)
         draw.text((80 + draw.textlength("to ", font=head), 312), "your first push-up", font=head, fill=ACCENT)
         draw.text((80, 424), "Bodyweight strength at home,", font=body, fill=TEXT_SECONDARY)
         draw.text((80, 466), "step by step.", font=body, fill=TEXT_SECONDARY)
-        phone = _capture(shots_dir, "06-home")
+        phone = _capture(shots_dir, "04-set")
         phone = phone.resize((300, round(phone.height * 300 / phone.width)), Image.LANCZOS)
         frame = Image.new("RGB", (phone.width + 20, phone.height + 20), (0x0B, 0x0C, 0x0D))
         ImageDraw.Draw(frame).rounded_rectangle((0, 0, frame.width - 1, frame.height - 1), radius=44, outline=BORDER, width=2)

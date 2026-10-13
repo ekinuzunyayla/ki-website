@@ -1,4 +1,4 @@
-/* Kip web site. Values follow the app's token set (docs/design/tokens.md, Theme A): dark only, like v1 of the app. */
+/* Ki web site. Values follow the app's token set (docs/design/tokens.md, Theme A): dark only, like v1 of the app. */
 
 @font-face { font-family: "Bricolage Grotesque"; font-weight: 800; font-style: normal; font-display: swap; src: url("../fonts/bricolage-800.woff2") format("woff2"); }
 @font-face { font-family: "Manrope"; font-weight: 200 800; font-style: normal; font-display: swap; src: url("../fonts/manrope.woff2") format("woff2"); }
